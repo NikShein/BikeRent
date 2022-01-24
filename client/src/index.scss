@@ -1,0 +1,126 @@
+$BG_COLOR: #f4f4f5;
+$RENT_COLOR: #ffffff;
+$FORM_COLOR: #e8e9ed;
+
+$SBM_COLOR: #51af91;
+$DEL_COLOR: #d34d51;
+$RNT_COLOR: #5160a6;
+
+$BRDR_COLOR: #c7c8cc;
+
+body {
+  background-color: $BG_COLOR;
+  font-family: 'Libre Franklin', sans-serif;
+
+  h2 {
+    margin-top: 40px;
+  }
+}
+
+.container {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.form {
+  background-color: $FORM_COLOR;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  border-radius: 4px;
+  padding: 25px;
+  border: 1px solid $BRDR_COLOR;
+
+  label {
+    font-size: 0.8rem;
+  }
+
+  input,
+  select {
+    box-sizing: border-box;
+    padding: 10px 5px;
+    display: block;
+    width: 200px;
+    border-radius: 4px;
+    background-color: $RENT_COLOR;
+    border: none;
+  }
+}
+
+button {
+  border: none;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 10px 20px;
+  color: $BG_COLOR;
+  border-radius: 4px;
+}
+
+.submit {
+  background-color: $SBM_COLOR;
+}
+
+.cancel-rent {
+  background-color: $DEL_COLOR;
+}
+
+.rent {
+  background-color: $RNT_COLOR;
+  margin-right: 15px;
+}
+
+.rentBicycle {
+  background-color: $RENT_COLOR;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 4px;
+  padding: 10px 25px;
+  border: 1px solid $BRDR_COLOR;
+}
+
+.data-bicycle {
+  p {
+    display: inline-block;
+  }
+
+  p:after {
+    content: '/';
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  p:last-child:after {
+    content: none;
+  }
+}
+
+@media (max-width: 1125px) {
+  .container {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .form {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    box-sizing: border-box;
+    width: 80%;
+
+    div {
+      margin-bottom: 15px;
+    }
+  }
+
+  input,
+  select {
+    box-sizing: border-box;
+    display: inline-block;
+  }
+
+  .rentBicycle {
+    flex-direction: column;
+  }
+}

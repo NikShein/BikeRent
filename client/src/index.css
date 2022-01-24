@@ -1,13 +1,137 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background-color: #f4f4f5;
+  font-family: 'Libre Franklin', sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body h2 {
+  margin-top: 40px;
 }
+
+.container {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.form {
+  background-color: #e8e9ed;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  border-radius: 4px;
+  padding: 25px;
+  border: 1px solid #c7c8cc;
+}
+
+.form label {
+  font-size: 0.8rem;
+}
+
+.form input,
+.form select {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px 5px;
+  display: block;
+  width: 200px;
+  border-radius: 4px;
+  background-color: #ffffff;
+  border: none;
+}
+
+button {
+  border: none;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 10px 20px;
+  color: #f4f4f5;
+  border-radius: 4px;
+}
+
+.submit {
+  background-color: #51af91;
+}
+
+.cancel-rent {
+  background-color: #d34d51;
+}
+
+.rent {
+  background-color: #5160a6;
+  margin-right: 15px;
+}
+
+.rentBicycle {
+  background-color: #ffffff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  border-radius: 4px;
+  padding: 10px 25px;
+  border: 1px solid #c7c8cc;
+}
+
+.data-bicycle p {
+  display: inline-block;
+}
+
+.data-bicycle p:after {
+  content: '/';
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.data-bicycle p:last-child:after {
+  content: none;
+}
+
+@media (max-width: 1125px) {
+  .container {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .form {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    margin: 0 auto;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    width: 80%;
+  }
+  .form div {
+    margin-bottom: 15px;
+  }
+  input,
+  select {
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    display: inline-block;
+  }
+  .rentBicycle {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+/*# sourceMappingURL=index.css.map */
