@@ -1,0 +1,4 @@
+{
+  "port": 5000,
+  "mongoURI": "mongodb+srv://NikShein:NIKshein9306@cluster0.idakx.mongodb.net/bikerent?retryWrites=true&w=majority"
+}
