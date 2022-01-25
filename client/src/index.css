@@ -52,10 +52,25 @@ button {
   padding: 10px 20px;
   color: #f4f4f5;
   border-radius: 4px;
+  -webkit-transition: 500ms;
+  transition: 500ms;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+button:disabled {
+  color: #f4f4f5;
+  background-color: #8d9e99;
 }
 
 .submit {
   background-color: #51af91;
+}
+
+.submit:disabled {
+  background-color: #8d9e99 !important;
 }
 
 .cancel-rent {
@@ -95,6 +110,60 @@ button {
 
 .data-bicycle p:last-child:after {
   content: none;
+}
+
+.alert {
+  position: absolute;
+  left: 70%;
+  top: 10px;
+  width: 20%;
+  background-color: #d34d51;
+  border-radius: 4px;
+  text-align: center;
+  padding: 10px;
+  color: #f4f4f5;
+  margin-bottom: 20px;
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.alert p {
+  margin: 0;
+}
+
+.alert.entering {
+  -webkit-animation: show-alert 1s forwards;
+          animation: show-alert 1s forwards;
+}
+
+.alert.exiting {
+  animation: show-alert 1s reverse;
+}
+
+@-webkit-keyframes show-alert {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-100px);
+            transform: translateY(-100px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+
+@keyframes show-alert {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-100px);
+            transform: translateY(-100px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
 }
 
 @media (max-width: 1125px) {

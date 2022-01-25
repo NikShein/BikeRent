@@ -3,6 +3,7 @@ $RENT_COLOR: #ffffff;
 $FORM_COLOR: #e8e9ed;
 
 $SBM_COLOR: #51af91;
+$DSB_COLOR: #8d9e99;
 $DEL_COLOR: #d34d51;
 $RNT_COLOR: #5160a6;
 
@@ -55,10 +56,24 @@ button {
   padding: 10px 20px;
   color: $BG_COLOR;
   border-radius: 4px;
+  transition: 500ms;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+button:disabled {
+  color: $BG_COLOR;
+  background-color: $DSB_COLOR;
 }
 
 .submit {
   background-color: $SBM_COLOR;
+}
+
+.submit:disabled {
+  background-color: $DSB_COLOR !important;
 }
 
 .cancel-rent {
@@ -93,6 +108,51 @@ button {
 
   p:last-child:after {
     content: none;
+  }
+}
+
+.alert {
+  p {
+    margin: 0;
+  }
+
+  position: absolute;
+  left: 70%;
+  top: 10px;
+  width: 20%;
+  background-color: $DEL_COLOR;
+  border-radius: 4px;
+  text-align: center;
+  padding: 10px;
+  color: $BG_COLOR;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.alert.entering {
+  animation: show-alert 1s forwards;
+}
+
+// .alert.entered {
+//   animation: show-alert 1s forwards;
+// }
+
+.alert.exiting {
+  animation: show-alert 1s reverse;
+}
+
+// .alert.exited {
+//   animation: show-alert 1s reverse;
+// }
+
+@keyframes show-alert {
+  0% {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

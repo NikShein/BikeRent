@@ -1,11 +1,13 @@
 const express = require('express');
 const config = require('config');
 const mongoose = require('mongoose');
-const main = require('./routes/main');
+const add = require('./routes/add');
 
 const app = express();
 
-app.use('/', main);
+app.use(express.json({ extended: true }));
+
+app.use('/api', add);
 
 const PORT = config.get('port') || 5000;
 

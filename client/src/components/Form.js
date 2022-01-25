@@ -1,6 +1,6 @@
-function Form() {
+function Form({ changeFormHandler, addBike, alert, formValidate }) {
   return (
-    <form className="form">
+    <div className="form">
       <div>
         <label htmlFor="name">Bike name</label>
         <input
@@ -8,14 +8,26 @@ function Form() {
           type="text"
           name="bikeName"
           placeholder="Select name"
-        ></input>
+          onChange={changeFormHandler}
+          onInput={formValidate}
+        />
       </div>
 
       <div>
         <label htmlFor="type">Bike type</label>
-        <select id="type" name="bikeType">
-          <option>Пункт 1</option>
-          <option>Пункт 2</option>
+        <select id="type" name="bikeType" onBlur={changeFormHandler}>
+          <option value="">Choose type</option>
+          <option>Road Bike</option>
+          <option>Mountain Bike</option>
+          <option>Touring Bike</option>
+          <option>Folding Bike</option>
+          <option>Fixed Gear/ Track Bike</option>
+          <option>BMX</option>
+          <option>Recumbent Bike</option>
+          <option>Cruiser</option>
+          <option>Hybrid Bike</option>
+          <option>Cyclocross Bike</option>
+          <option>Electric Bike</option>
         </select>
       </div>
 
@@ -26,13 +38,15 @@ function Form() {
           type="text"
           name="rentPrice"
           placeholder="Select price"
+          onChange={changeFormHandler}
+          onInput={formValidate}
         ></input>
       </div>
 
-      <button className="submit" type="submit">
+      <button className="submit" onClick={addBike}>
         Submit rent
       </button>
-    </form>
+    </div>
   );
 }
 
