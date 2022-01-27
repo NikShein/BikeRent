@@ -1,11 +1,11 @@
 const { Schema, model } = require('mongoose');
 
-const bikeSchema = new Schema({
-  bikeName: {
+const bicycleSchema = new Schema({
+  bicycleName: {
     type: String,
     required: true,
   },
-  bikeType: {
+  bicycleType: {
     type: String,
     required: true,
   },
@@ -15,4 +15,4 @@ const bikeSchema = new Schema({
   },
 });
 
-module.exports = model('Bike', bikeSchema);
+module.exports = model('Bicycle', bicycleSchema);

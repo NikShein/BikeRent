@@ -6,6 +6,7 @@ $SBM_COLOR: #51af91;
 $DSB_COLOR: #8d9e99;
 $DEL_COLOR: #d34d51;
 $RNT_COLOR: #5160a6;
+$ALERT_COLOR: rgba(0, 0, 0, 0.699);
 
 $BRDR_COLOR: #c7c8cc;
 
@@ -93,6 +94,7 @@ button:disabled {
   border-radius: 4px;
   padding: 10px 25px;
   border: 1px solid $BRDR_COLOR;
+  margin-bottom: 20px;
 }
 
 .data-bicycle {
@@ -115,12 +117,12 @@ button:disabled {
   p {
     margin: 0;
   }
-
+  box-sizing: border-box;
   position: absolute;
   left: 70%;
   top: 10px;
   width: 20%;
-  background-color: $DEL_COLOR;
+  background-color: $ALERT_COLOR;
   border-radius: 4px;
   text-align: center;
   padding: 10px;
@@ -133,17 +135,9 @@ button:disabled {
   animation: show-alert 1s forwards;
 }
 
-// .alert.entered {
-//   animation: show-alert 1s forwards;
-// }
-
 .alert.exiting {
   animation: show-alert 1s reverse;
 }
-
-// .alert.exited {
-//   animation: show-alert 1s reverse;
-// }
 
 @keyframes show-alert {
   0% {
@@ -153,6 +147,43 @@ button:disabled {
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+.lds-ring {
+  display: block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid $RNT_COLOR;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: $RNT_COLOR transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
 

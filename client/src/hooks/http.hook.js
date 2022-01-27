@@ -1,27 +1,26 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 
 export const useHttp = () => {
-  const request = useCallback(
-    async (url, method = 'GET', body = null, headers = {}) => {
-      console.log(url, method, body);
-      try {
-        if (body) {
-          body = JSON.stringify(body);
-          headers['Content-Type'] = 'application/json';
-        }
-
-        const response = await fetch(url, { method, body, headers });
-        const data = await response.json();
-        if (!response.ok) {
-          throw new Error('Что-то пошло не так!');
-        }
-        return data;
-      } catch (e) {
-        throw e;
+  const [loading, setLoading] = useState(false);
+  const request = async (url, method = 'GET', body = null, headers = {}) => {
+    setLoading(true);
+    try {
+      if (body) {
+        body = JSON.stringify(body);
+        headers['Content-Type'] = 'application/json';
       }
-    },
-    []
-  );
 
-  return request;
+      const response = await fetch(url, { method, body, headers });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error('Введите корректные данные!');
+      }
+      setLoading(false);
+      return data;
+    } catch (e) {
+      throw e;
+    }
+  };
+
+  return { request, loading };
 };

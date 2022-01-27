@@ -1,21 +1,24 @@
-function Form({ changeFormHandler, addBike, alert, formValidate }) {
+import { useContext } from 'react';
+import { MainContext } from '../App';
+
+function Form() {
+  const { changeFormHandler, addBicycles } = useContext(MainContext);
   return (
     <div className="form">
       <div>
-        <label htmlFor="name">Bike name</label>
+        <label htmlFor="name">Bicycle name</label>
         <input
           id="name"
           type="text"
-          name="bikeName"
+          name="bicycleName"
           placeholder="Select name"
           onChange={changeFormHandler}
-          onInput={formValidate}
         />
       </div>
 
       <div>
-        <label htmlFor="type">Bike type</label>
-        <select id="type" name="bikeType" onBlur={changeFormHandler}>
+        <label htmlFor="type">Bicycle type</label>
+        <select id="type" name="bicycleType" onBlur={changeFormHandler}>
           <option value="">Choose type</option>
           <option>Road Bike</option>
           <option>Mountain Bike</option>
@@ -39,11 +42,10 @@ function Form({ changeFormHandler, addBike, alert, formValidate }) {
           name="rentPrice"
           placeholder="Select price"
           onChange={changeFormHandler}
-          onInput={formValidate}
         ></input>
       </div>
 
-      <button className="submit" onClick={addBike}>
+      <button className="submit" onClick={addBicycles}>
         Submit rent
       </button>
     </div>
