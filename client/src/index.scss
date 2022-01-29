@@ -36,17 +36,23 @@ body {
   label {
     font-size: 0.8rem;
   }
+}
+input,
+select {
+  box-sizing: border-box;
+  padding: 10px 5px;
+  display: block;
+  width: 200px;
+  border-radius: 4px;
+  background-color: $RENT_COLOR;
+  border: none;
+}
 
-  input,
-  select {
-    box-sizing: border-box;
-    padding: 10px 5px;
-    display: block;
-    width: 200px;
-    border-radius: 4px;
-    background-color: $RENT_COLOR;
-    border: none;
-  }
+select.times {
+  border: 1px solid $BRDR_COLOR;
+  width: auto;
+  display: inline-block;
+  margin-right: 15px;
 }
 
 button {
@@ -113,6 +119,10 @@ button:disabled {
   }
 }
 
+.data-bicyclep:last-child:after {
+  content: none;
+}
+
 .alert {
   p {
     margin: 0;
@@ -156,6 +166,7 @@ button:disabled {
   width: 80px;
   height: 80px;
   margin: 0 auto;
+  margin-top: 200px;
 }
 .lds-ring div {
   box-sizing: border-box;

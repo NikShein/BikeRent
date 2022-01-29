@@ -6,19 +6,24 @@ import Form from './components/Form';
 import RentBicycle from './components/RentBicycle';
 import Alert from './components/Alert';
 import Loader from './components/Loader';
+import { findCard, clearForm } from './helpers';
 
 export const MainContext = React.createContext();
 
 function App() {
-  const [rents, setRents] = useState([]);
-  const [availables, setAvsilable] = useState([]);
-  const [render, setRender] = useState(false);
+  const [available, setAvailable] = useState([]);
+  const [rent, setRent] = useState([]);
+  const [timePrice, setTimePrice] = useState('');
+  const [findPrice, setFindPrice] = useState('');
+  const [modeBtn, setModeBtn] = useState(false);
+  const [loading, setLoading] = useState(true);
+
   const [form, setForm] = useState({
     bicycleName: '',
     bicycleType: '',
     rentPrice: '',
   });
-  const { request, loading } = useHttp();
+  const { request } = useHttp();
   const { message, alert, text } = useMessage();
 
   const changeFormHandler = (event) => {
@@ -43,84 +48,113 @@ function App() {
       try {
         const data = await request('/api/add', 'POST', { ...form });
         message(data.message);
-        setRender(!render);
       } catch (e) {
         message(e.message);
       }
+      getAvailableBicycles();
+      clearForm();
     }
   };
 
   const getAvailableBicycles = async () => {
+    setLoading(true);
     try {
-      const data = await request('/api/bicycle', 'GET', null);
-      setAvsilable((prev) => data);
+      const bicycles = await request('/api/bicycle', 'GET', null);
+      setAvailable(bicycles);
     } catch (e) {
       message(e.message);
     }
-  };
-
-  const addBicycleToRent = async (bicycle) => {
-    setRents([...rents, bicycle]);
-    try {
-      const data = await request('/api/add-to-rent', 'POST', bicycle);
-      message(data.message);
-    } catch (e) {
-      message(e.message);
-    }
-    removeAvailable(bicycle, 'Велосипед арендован!');
-  };
-
-  const removeRentBicycle = async (bicycle) => {
-    try {
-      const data = await request('/api/remove-from-rent', 'POST', bicycle);
-      message(data.message);
-    } catch (e) {
-      message(e.message);
-    }
-    try {
-      request('/api/add', 'POST', bicycle);
-      setRender(!render);
-    } catch (e) {
-      message(e.message);
-    }
-  };
-
-  const removeAvailable = async (bicycle, text) => {
-    try {
-      const data = await request('/api/remove-from-available', 'POST', bicycle);
-      setRender(!render);
-      text ? message(text) : message(data.message);
-    } catch (e) {
-      message(e.message);
-    }
+    setLoading(false);
   };
 
   const getRentBicycles = async () => {
+    setLoading(true);
     try {
-      const data = await request('/api/rent-bicycles', 'GET', null);
-      setRents(data);
+      const rents = await request('/api/rent-bicycles', 'GET', null);
+      setRent(rents);
     } catch (e) {
       message(e.message);
     }
+    setLoading(false);
   };
 
   useEffect(() => {
     getAvailableBicycles();
     getRentBicycles();
-  }, [render]);
+  }, []);
+
+  const addBicycleToRent = async (event, bicycle) => {
+    setModeBtn(true);
+    const time = selectRentTime(event.target.id);
+    if (time >= 20) {
+      setTimePrice(
+        `$${Number(time) * (bicycle.rentPrice / 2)} for ${time} hours`
+      );
+    } else {
+      setTimePrice(`$${Number(time) * bicycle.rentPrice} for ${time} hours`);
+    }
+
+    try {
+      const data = await request('/api/add-to-rent', 'POST', bicycle);
+      await request('/api/remove-from-available', 'POST', bicycle);
+      message(data.message);
+    } catch (e) {
+      message(e.message);
+    }
+    getAvailableBicycles();
+    getRentBicycles();
+    setModeBtn(false);
+  };
+
+  const removeBicycleFromRent = async (bicycle) => {
+    setModeBtn(true);
+    try {
+      const data = await request('/api/remove-from-rent', 'POST', bicycle);
+      await request('/api/add', 'POST', bicycle);
+      message(data.message);
+    } catch (e) {
+      message(e.message);
+    }
+    getAvailableBicycles();
+    getRentBicycles();
+
+    setModeBtn(false);
+  };
+
+  async function removeFromAvailable(bicycle) {
+    setModeBtn(true);
+
+    try {
+      await request('/api/remove-from-available', 'POST', bicycle);
+    } catch (e) {
+      message(e.message);
+    }
+    setAvailable(findCard(available, bicycle));
+    setModeBtn(false);
+  }
+
+  function selectRentTime(ind) {
+    let selects = Array.from(document.querySelectorAll('.times'));
+    let select = selects.filter((select) => select.id === ind);
+    const timeRent = select[0].value.replace(/[^0-9]/g, '');
+    return timeRent;
+  }
 
   return (
     <MainContext.Provider
       value={{
         alert,
         text,
+        modeBtn,
+        timePrice,
+        findPrice,
         changeFormHandler,
         addBicycles,
-        availables,
+        available,
         addBicycleToRent,
-        rents,
-        removeRentBicycle,
-        removeAvailable,
+        rent,
+        removeBicycleFromRent,
+        removeFromAvailable,
       }}
     >
       <div className="container">
@@ -130,9 +164,14 @@ function App() {
 
         <Form />
 
-        <RentBicycle />
-
-        {loading ? <Loader /> : <AvailableBicycle />}
+        {loading ? (
+          <Loader />
+        ) : (
+          <>
+            <RentBicycle />
+            <AvailableBicycle />
+          </>
+        )}
       </div>
     </MainContext.Provider>
   );

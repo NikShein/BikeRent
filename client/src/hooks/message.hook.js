@@ -6,8 +6,9 @@ export const useMessage = () => {
   const message = useCallback((textAlert) => {
     setText((prev) => textAlert);
     setAlert((prev) => true);
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setAlert((prev) => false);
+      clearTimeout(timer);
     }, 1500);
   }, []);
 

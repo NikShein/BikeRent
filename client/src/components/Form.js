@@ -18,13 +18,18 @@ function Form() {
 
       <div>
         <label htmlFor="type">Bicycle type</label>
-        <select id="type" name="bicycleType" onBlur={changeFormHandler}>
+        <select
+          id="type"
+          name="bicycleType"
+          onBlur={changeFormHandler}
+          className="select"
+        >
           <option value="">Choose type</option>
           <option>Road Bike</option>
           <option>Mountain Bike</option>
           <option>Touring Bike</option>
           <option>Folding Bike</option>
-          <option>Fixed Gear/ Track Bike</option>
+          <option>Fixed Gear</option>
           <option>BMX</option>
           <option>Recumbent Bike</option>
           <option>Cruiser</option>

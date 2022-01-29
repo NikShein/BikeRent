@@ -26,4 +26,13 @@ router.get('/rent-bicycles', async (req, res) => {
   }
 });
 
+router.get('/get-one-bicycle', async (req, res) => {
+  try {
+    const rentBicycles = await Rent.findById({ _id });
+    res.json(rentBicycles);
+  } catch (e) {
+    res.status(500).json({ message: 'Введите корректные данные!' });
+  }
+});
+
 module.exports = router;
